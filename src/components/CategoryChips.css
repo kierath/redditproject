@@ -1,0 +1,35 @@
+.category-chips {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 10px 20px;
+  background-color: red;
+  margin: 0;
+  width: 100%;
+}
+
+/* Make each chip the same size as search button */
+.chip {
+  height: 40px; /* Match search bar elements */
+  line-height: 1.2;
+  padding: 0 20px;
+  border: 2px solid white;
+  border-radius: 25px; /* Same as search bar button */
+  background-color: red;
+  color: white;
+  font-family: 'Lato', sans-serif;
+  font-size: 16px; /* Match search input text size */
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.chip:hover {
+  background-color: #ffe5e528;
+  transform: scale(1.05);
+}
