@@ -6,7 +6,6 @@ export const SearchBar = ({ onSearch }) => {
   const [term, setTerm] = useState('');
   const [sort, setSort] = useState('relevance');
   const navigate = useNavigate();
-  const location = useLocation();
 
   const handleSearch = () => {
     if (!term.trim()) return;
