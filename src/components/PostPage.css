@@ -1,0 +1,38 @@
+/* PostPage CSS */
+.post-page{
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: #ffe5e5;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.post-page h2 {
+    font-family: 'Archivo Black', sans-serif;
+    color: #ff0000;
+    text-shadow: 1px 1px rgba(0,0,0,0.2);
+}
+
+.post-page img {
+    width: 100%;
+    margin: 20px 0;
+    border-radius: 12px;
+}
+
+.post-page p {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.post-page .comment {
+    margin: 12px 0;
+    padding: 10px;
+    background-color: #ffcccc;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.post-page .comment strong {
+    color: #900;
+}

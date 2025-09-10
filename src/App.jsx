@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { PostList } from './components/PostList';
+import { PostPage } from './components/PostPage';
 import './App.css';
 
 export const App = () => {
@@ -21,7 +22,7 @@ export const App = () => {
         <Route path="/search" element={<PostList searchPage />} />
 
         {/* Placeholder for individual post view */}
-        <Route path="/post/:subreddit/:id" element={<p>Post details coming soon...</p>} />
+        <Route path="/post/:id" element={<PostPage />} />
       </Routes>
     </Router>
   );

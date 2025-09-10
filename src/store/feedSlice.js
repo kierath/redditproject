@@ -46,10 +46,12 @@ export const fetchPosts = createAsyncThunk('posts/fetchPosts', async (_, { rejec
   return data.data.children.map(({ data }) => ({ 
     id: data.id,
     title: data.title,
+    body: data.selftext || '',
     image:
       (data.preview?.images?.[0]?.source?.url ||
         (data.thumbnail?.startsWith('http') ? data.thumbnail : null))?.replace(/&amp;/g, '&') ||
       null,
+    subreddit: data.subreddit,
   }));
 });
 
@@ -73,13 +75,39 @@ export const searchPosts = createAsyncThunk(
     return data.data.children.map(({ data }) => ({
       id: data.id,
       title: data.title,
+      body: data.selftext || '',
       image:
         (data.preview?.images?.[0]?.source?.url ||
           (data.thumbnail?.startsWith('http') ? data.thumbnail : null))?.replace(/&amp;/g, '&') ||
         null,
+      subreddit: data.subreddit,
     }));
   }
 );
+
+export const fetchComments = createAsyncThunk(
+  'posts/fetchComments',
+  async (postId, {rejectWithValue}) => {
+    const token = await getAccessToken();
+    if (!token) return rejectWithValue('Missing Reddit access token');
+
+    const response = await fetch(`https://oauth.reddit.com/comments/${postId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    if (!response.ok) return rejectWithValue('Failed to fetch comments');
+
+    const data = await response.json();
+    const comments = data[1]?.data?.children 
+      .filter(c => c.kind === 't1') // Only comment type
+      .map(c => ({
+        author: c.data.author,
+        text: c.data.body,
+      })) || [];
+
+    return { postId, comments };
+  }
+)
 
 export const feedSlice = createSlice({
   name: 'posts',
@@ -88,6 +116,8 @@ export const feedSlice = createSlice({
     loading: false,
     error: null,
     after: null,
+    comments: {},
+    commentsLoading: {}
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -115,6 +145,20 @@ export const feedSlice = createSlice({
       .addCase(searchPosts.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload || action.error?.message;
+      })
+      .addCase(fetchComments.pending, (state, action) => {
+        const postId = action.meta.arg;
+        state.commentsLoading[postId] = true;
+      })
+      .addCase(fetchComments.fulfilled, (state, action) => {
+        const { postId, comments } = action.payload;
+        state.comments[postId] = comments;
+        state.commentsLoading[postId] = false;
+      })
+      .addCase(fetchComments.rejected, (state, action) => {
+        const postId = action.meta.arg;
+        state.commentsLoading[postId] = false;
+        console.error('Failed to load comments:', action.payload || action.error?.message);
       });
   },
 });
