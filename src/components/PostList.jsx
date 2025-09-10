@@ -7,7 +7,6 @@ import { SearchBar } from './SearchBar';
 import { CategoryChips } from './CategoryChips';
 import './PostList.css';
 
-
 export const PostList = () => {
   const dispatch = useDispatch();
   const posts = useSelector((state) => state.posts.posts);

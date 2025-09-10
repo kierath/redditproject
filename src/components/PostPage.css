@@ -1,38 +1,91 @@
 /* PostPage CSS */
-.post-page{
-    max-width: 800px;
-    margin: 20px auto;
-    padding: 20px;
-    background: #ffe5e5;
-    border-radius: 16px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+.post-page {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #ffe5e5;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .post-page h2 {
-    font-family: 'Archivo Black', sans-serif;
-    color: #ff0000;
-    text-shadow: 1px 1px rgba(0,0,0,0.2);
+  font-family: 'Archivo Black', sans-serif;
+  color: #ff0000;
+  text-shadow: 1px 1px rgba(0, 0, 0, 0.2);
+  margin-bottom: 16px;
 }
 
-.post-page img {
-    width: 100%;
-    margin: 20px 0;
-    border-radius: 12px;
+.post-image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px 0;
+  flex-wrap: wrap; 
+}
+
+.post-image-container img {
+  width: 350px;
+  height: 350px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+}
+
+.post-navigation {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  height: 350px;
+}
+
+
+.post-navigation button {
+  background: white;
+  border: 2px solid #ff0000;
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  font-size: 22px;
+  font-weight: bold;
+  color: #ff0000;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.post-navigation button:hover {
+  background: #ffe5e5;
+  transform: scale(1.1);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
 }
 
 .post-page p {
-    font-size: 16px;
-    line-height: 1.6;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 .post-page .comment {
-    margin: 12px 0;
-    padding: 10px;
-    background-color: #ffcccc;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  margin: 12px 0;
+  padding: 10px;
+  background-color: #ffcccc;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .post-page .comment strong {
-    color: #900;
+  color: #900;
+}
+
+@media (max-width: 600px) {
+  .post-image-container {
+    flex-direction: column;
+  }
+  .post-navigation {
+    flex-direction: row;
+    height: auto;
+    gap: 12px;
+  }
 }

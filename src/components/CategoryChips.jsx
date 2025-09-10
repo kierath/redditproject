@@ -2,6 +2,7 @@ import React from "react";
 import {useNavigate} from "react-router-dom";
 import "./CategoryChips.css";
 
+//Categories for home page
 const categories = [
     {label: "Trending", path: "/"},
     {label: "News", path: "/r/news"},
@@ -18,7 +19,6 @@ const categories = [
 
 export const CategoryChips = () => {
     const navigate = useNavigate();
-
     return (
     <div className="category-chips">
       {categories.map((cat) => (
